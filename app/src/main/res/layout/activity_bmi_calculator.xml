@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainBMICalculator">
+    tools:context=".BMI_Calculator.MainBMICalculator">
+
+    <Spinner
+        android:id="@+id/spinner_bmi_category"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
