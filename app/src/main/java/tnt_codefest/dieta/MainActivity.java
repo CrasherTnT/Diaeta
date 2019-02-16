@@ -6,15 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import tnt_codefest.dieta.Database.SQLiteHelper;
+
 import tnt_codefest.dieta.BMI_Calculator.MainBMICalculator;
 
 public class MainActivity extends AppCompatActivity {
+
+    // Database
+    private SQLiteHelper sqLiteHelper;
+
     private Button button_go_bmicalculator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sqLiteHelper = new SQLiteHelper(getApplicationContext());
 
         button_go_bmicalculator = findViewById(R.id.button_go_bmicalculator);
 
@@ -25,5 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 }
