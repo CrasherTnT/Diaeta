@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         sqLiteHelper = new SQLiteHelper(getApplicationContext());
 
+        sqLiteHelper.addUser("SusejParty", "Sus", "Mariajoseph", 69.5, 147, 25.0, 1);
+
+
+
         button_go_bmicalculator = findViewById(R.id.button_go_bmicalculator);
 
         button_go_bmicalculator.setOnClickListener(new View.OnClickListener() {
