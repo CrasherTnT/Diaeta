@@ -50,7 +50,6 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
             @Override
             public void onClick(View v) {
                 double result = 0;
-
                 if (spinner_bmi_category.getSelectedItem().toString().equals("Standard")){
                     double feet = Double.parseDouble(field_feet.getText().toString());
                     double inches = Double.parseDouble(field_inches.getText().toString());

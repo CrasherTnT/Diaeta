@@ -46,7 +46,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("Jesus", "Database created I think");
         db.execSQL(CREATE_USER);
     }
 
