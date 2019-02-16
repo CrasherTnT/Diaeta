@@ -57,14 +57,12 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
                     double pounds = Double.parseDouble(field_pounds.getText().toString());
 
                     result = calculateStandard(feet, inches, pounds);
-                    label_result.setText(((Double) result).toString());
                 }
                 else if (spinner_bmi_category.getSelectedItem().toString().equals("Metric")){
                     double centimeters = Double.parseDouble(field_feet.getText().toString());
                     double kilograms = Double.parseDouble(field_pounds.getText().toString());
 
                     result = calculateMetric(centimeters ,kilograms);
-                    label_result.setText(((Double) result).toString());
                 }
 
                 Intent intent = new Intent(getApplicationContext(), WeightClassification.class);
