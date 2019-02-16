@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="tnt_codefest.dieta">
+    package="tnt_codefest.diaeta">
 
     <application
         android:allowBackup="true"
@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="tnt_codefest.diaeta.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BMI_Calculator.MainBMICalculator" />
-        <activity android:name=".BMI_Calculator.WeightClassification"></activity>
+        <activity android:name="tnt_codefest.diaeta.BMI_Calculator.MainBMICalculator" />
+        <activity android:name="tnt_codefest.diaeta.BMI_Calculator.WeightClassification"></activity>
     </application>
 
 </manifest>

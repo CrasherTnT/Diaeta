@@ -1,4 +1,4 @@
-package tnt_codefest.dieta;
+package tnt_codefest.diaeta;
 
 import org.junit.Test;
 

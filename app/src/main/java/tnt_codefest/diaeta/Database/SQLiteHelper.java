@@ -1,17 +1,20 @@
 // Database Details
-package tnt_codefest.dieta.Database;
+package tnt_codefest.diaeta.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.strictmode.SqliteObjectLeakedViolation;
+import android.util.Log;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     // New Changes
 
     // Database Details
-    private static final String DATABASE_NAME = "dieata.db";
+    private static final String DATABASE_NAME = "diaeta.db";
     private static int DATABASE_VERSION = 1;
 
     // User Table
@@ -27,7 +30,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     // Create User table
 
-    private static final String CREATE_USER = "CREATE TABLE " + USER_TABLE + "(" +
+    private static final String CREATE_USER = "CREATE TABLE " + USER_TABLE + " (" +
             USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             USER_USERNAME + " TEXT," +
             USER_FIRSTNAME + " TEXT, " +
@@ -43,6 +46,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("Jesus", "Database created I think");
         db.execSQL(CREATE_USER);
     }
 
@@ -52,7 +56,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // GET METHODS
+    // ADD METHODS
 
     public boolean addUser(String userName, String firstName, String lastName, double height, double weight, double bmi, int
             current_week){
@@ -75,6 +79,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         else
             return true;
 
+    }
+
+    // GET METHODS
+
+    public Cursor getUser(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + USER_TABLE;
+        Cursor data = db.rawQuery(query, null);
+        return data;
     }
 
 

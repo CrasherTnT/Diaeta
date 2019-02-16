@@ -1,4 +1,4 @@
-package tnt_codefest.dieta.BMI_Calculator;
+package tnt_codefest.diaeta.BMI_Calculator;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import tnt_codefest.dieta.R;
+import tnt_codefest.diaeta.R;
 
 
 public class MainBMICalculator extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -35,7 +35,7 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
         field_inches = findViewById(R.id.field_inches);
         field_pounds = findViewById(R.id.field_pounds);
         button_calculate = findViewById(R.id.button_calculate);
-        label_result = findViewById(R.id.label_result);
+        label_result = findViewById(R.id.label_bmi_category);
         spinner_bmi_category = findViewById(R.id.spinner_bmi_category);
 
         spinner_bmi_category.setOnItemSelectedListener(this);
