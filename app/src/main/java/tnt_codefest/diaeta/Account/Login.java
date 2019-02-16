@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import tnt_codefest.diaeta.Database.SQLiteHelper;
+import tnt_codefest.diaeta.MainActivity;
 import tnt_codefest.diaeta.R;
 
 public class Login extends AppCompatActivity {
@@ -19,6 +20,8 @@ public class Login extends AppCompatActivity {
 
     private EditText username, password;
     private Button login, signup;
+
+    private int userIndex = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +41,9 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 if(validateAccount(username.getText().toString(), password.getText().toString())){
                     // Successfully Logged In
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    // TODO: Change the MainActivity.class
+                    i.putExtra("USER_INDEX", userIndex);
                 }
                 else{
                     toastMessage("Username or Password is either incorrect");
@@ -65,8 +71,10 @@ public class Login extends AppCompatActivity {
 
             boolean passwordMatch = PasswordUtil.verifyUserPassword(password, securePassword, salt);
 
-            if(passwordMatch)
+            if(passwordMatch) {
+                userIndex = userData.getInt(0);
                 return true;
+            }
         }
         userData.close();
         return false;
