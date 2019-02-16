@@ -66,14 +66,12 @@
 
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_login"
                 android:layout_below="@+id/field_password"
                 android:layout_width="100dp"
                 android:layout_height="43dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="147dp"
-                android:layout_marginRight="147dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/button_round"
                 android:text="Log In"
@@ -81,10 +79,10 @@
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/button_signup"
                 android:layout_width="100dp"
                 android:layout_height="43dp"
-                android:layout_below="@+id/button2"
+                android:layout_below="@+id/button_login"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_round2"
@@ -92,34 +90,39 @@
                 android:textSize="18sp"
                 android:textColor="#FFFF"/>
 
-            <ImageView
-                android:layout_below="@id/button3"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/facebook"
-                android:layout_marginTop="35dp"
-                android:layout_marginHorizontal="120dp"/>
+            <LinearLayout
+                android:id="@+id/social_media"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/button_signup">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/facebook" />
 
-            <ImageView
-                android:id="@+id/image_google"
-                android:layout_below="@id/button3"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/google"
-                android:layout_marginTop="35dp"
-                android:layout_marginHorizontal="170dp"/>
+                <ImageView
+                    android:id="@+id/image_google"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/google" />
 
-            <ImageView
-                android:layout_below="@id/button3"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/instagram"
-                android:layout_marginTop="35dp"
-                android:layout_marginHorizontal="220dp"/>
+                <ImageView
+
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/instagram" />
+            </LinearLayout>
+
+
 
             <TextView
-                android:layout_below="@+id/image_google"
-                android:layout_marginHorizontal="137dp"
+                android:layout_below="@+id/social_media"
+                android:layout_centerHorizontal="true"
                 android:textSize="7dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
