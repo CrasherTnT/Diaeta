@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,6 +61,8 @@ public class Signup extends AppCompatActivity {
 
                             sqLiteHelper.addUser(username.getText().toString(), mySecurePassword, salt, fname.getText().toString(), lname.getText().toString(),
                                     0, 0, 0, 0);
+
+                            Log.d("DATABASE","User Successfully Added to the database");
 
                             // Go to next activity
                             int index = 0;

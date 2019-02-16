@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +42,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 if(validateAccount(username.getText().toString(), password.getText().toString())){
                     // Successfully Logged In
+                    Log.d("DATABASE","Database working.");
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     // TODO: Change the MainActivity.class
                     i.putExtra("USER_INDEX", userIndex);
