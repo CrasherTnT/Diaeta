@@ -102,6 +102,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor findUser(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + USER_TABLE + " WHERE " + USER_ID + "= " + id;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+
 
 
 }
