@@ -46,7 +46,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="230dp"
+                android:layout_marginTop="200dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="First Name" />
@@ -59,26 +59,118 @@
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="Last Name" />
 
             <TextView
+                android:id="@+id/birth_date"
                 android:layout_below="@+id/field_last_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="70dp"
-                android:text="Birthdate"/>
+                android:text="Birthdate"
+                android:textSize="14sp"/>
+            <LinearLayout
+                android:id="@+id/social_media"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/field_last_name">
+                
+                <Spinner
+                    android:id="@+id/spinner_month"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="50dp"
+                    android:layout_height="26dp"></Spinner>
+
+                <Spinner
+                    android:id="@+id/spinner_day"
+                    android:layout_width="50dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="26dp"></Spinner>
+                <Spinner
+                    android:id="@+id/spinner_year"
+                    android:layout_width="50dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="26dp"></Spinner>
+
+                
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/field_user_name"
+                android:paddingLeft="20dp"
+                android:layout_below="@+id/birth_date"
+                android:background="@drawable/edit_round"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Username" />
+
+            <EditText
+                android:id="@+id/field_pass_word"
+                android:paddingLeft="20dp"
+                android:layout_below="@+id/field_user_name"
+                android:background="@drawable/edit_round"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="Password" />
+
+            <EditText
+                android:id="@+id/field_confirmation"
+                android:paddingLeft="20dp"
+                android:layout_below="@+id/field_pass_word"
+                android:background="@drawable/edit_round"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="Password" />
 
 
 
+            <Button
+                android:id="@+id/button_sign_up"
+                android:layout_width="100dp"
+                android:layout_height="43dp"
+                android:layout_below="@+id/field_confirmation"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_round2"
+                android:text="Sign Up"
+                android:textSize="18sp"
+                android:textColor="#FFFF"/>
+
+            <TextView
+                android:layout_below="@+id/button_sign_up"
+                android:layout_centerHorizontal="true"
+                android:textSize="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an account? Login"/>
 
 
 
         </RelativeLayout>
-
 
 
 
