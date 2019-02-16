@@ -21,6 +21,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String USER_TABLE = "users";
     private static final String USER_ID = "user_id";
     private static final String USER_USERNAME = "user_name";
+    private static final String USER_SECUREPASSWORD = "secure_password";
+    private static final String USER_SALTPASSWORD = "salt_password";
     private static final String USER_FIRSTNAME = "first_name";
     private static final String USER_LASTNAME = "last_name";
     private static final String USER_HEIGHT = "height";
@@ -33,6 +35,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String CREATE_USER = "CREATE TABLE " + USER_TABLE + " (" +
             USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             USER_USERNAME + " TEXT," +
+            USER_SECUREPASSWORD + " TEXT, " +
+            USER_SALTPASSWORD + " TEXT, " +
             USER_FIRSTNAME + " TEXT, " +
             USER_LASTNAME + " TEXT, " +
             USER_HEIGHT + " DOUBLE, " +
@@ -57,13 +61,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     // ADD METHODS
 
-    public boolean addUser(String userName, String firstName, String lastName, double height, double weight, double bmi, int
+    public boolean addUser(String userName, String securePassword, String salt, String firstName, String lastName, double height, double weight, double bmi, int
             current_week){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(USER_USERNAME, userName);
+        contentValues.put(USER_SECUREPASSWORD, securePassword);
+        contentValues.put(USER_SALTPASSWORD, salt);
         contentValues.put(USER_FIRSTNAME, firstName);
         contentValues.put(USER_LASTNAME, lastName);
         contentValues.put(USER_HEIGHT, height);
@@ -85,6 +91,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public Cursor getUser(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + USER_TABLE;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    public Cursor findUser(String username){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + USER_TABLE + " WHERE " + USER_USERNAME + "= " + username;
         Cursor data = db.rawQuery(query, null);
         return data;
     }
