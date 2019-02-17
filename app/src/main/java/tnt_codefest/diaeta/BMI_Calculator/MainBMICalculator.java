@@ -99,7 +99,6 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 SharedPreferences preferences = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE);
                 preferences.edit().remove(PreferencesKeys.USER_LOGGED_IN).apply();
 
