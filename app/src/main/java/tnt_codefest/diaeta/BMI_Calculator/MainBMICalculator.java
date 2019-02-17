@@ -51,7 +51,7 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
 
         list_bmi_category.add("Standard");
         list_bmi_category.add("Metric");
-        ArrayAdapter<String> adapter_bmi_category = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list_bmi_category);
+        ArrayAdapter<String> adapter_bmi_category = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list_bmi_category);
         spinner_bmi_category.setAdapter(adapter_bmi_category);
 
 
@@ -84,7 +84,7 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
                     startActivity(intent);
                 }
                 catch(Exception e){
-
+                    // In case of error
                 }
 
             }
