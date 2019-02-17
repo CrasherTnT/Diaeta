@@ -6,18 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.CheckBox;
 
 import java.util.ArrayList;
 
-import tnt_codefest.diaeta.R;
-
 public class DietPlanDialog extends AppCompatDialogFragment {
+
     private TaskListener listener;
-    final CharSequence[] items = {" 2 Eggs"," 1 Hotdog"," 1 Cup of Rice "," 8 Glasses of Water "};
+    final CharSequence[] day1 = {" 2 Eggs"," 1 Hotdog"," 1 Cup of Rice "," 8 Glasses of Water "};
     final ArrayList selectedItems =new ArrayList();
 
     @Override
@@ -25,14 +20,14 @@ public class DietPlanDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle("DAY #")
-                .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                .setMultiChoiceItems(day1, null, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int index, boolean isChecked) {
                         if (isChecked){
-                            selectedItems.add(items[index]);
+                            selectedItems.add(day1[index]);
                         }
                         else{
-                            selectedItems.remove(items[index]);
+                            selectedItems.remove(day1[index]);
                         }
                     }
                 })

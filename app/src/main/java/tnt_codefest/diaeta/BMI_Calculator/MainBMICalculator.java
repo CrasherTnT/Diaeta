@@ -5,15 +5,13 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import tnt_codefest.diaeta.Account.Login;
 import tnt_codefest.diaeta.Database.PreferencesKeys;
@@ -21,22 +19,25 @@ import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.R;
 
 
-public class MainBMICalculator extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    private EditText field_feet, field_inches, field_pounds;
-    private Button button_calculate, button_logout;
-    private TextView label_result;
-    private Spinner spinner_bmi_category;
+public class MainBMICalculator extends AppCompatActivity{
+    private EditText field_feet, field_weight, field_inches, field_cm;
+    private Space space_height;
+    private RadioGroup radioGroup;
+    private RadioButton radioCategory;
+    private Button button_submit, button_logout;
+    private TextView label_height, label_weight;
+//    private Spinner spinner_bmi_category;
 
     private SQLiteHelper sqLiteHelper;
     private int USER_ID;
 
-    ArrayList<String> list_bmi_category = new ArrayList<>();
+//    ArrayList<String> list_bmi_category = new ArrayList<>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bmi_calculator);
+        setContentView(R.layout.weight_class_layout);
 
         sqLiteHelper = new SQLiteHelper(getApplicationContext());
 
@@ -45,31 +46,88 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
 
         field_feet = findViewById(R.id.field_feet);
         field_inches = findViewById(R.id.field_inches);
-        field_pounds = findViewById(R.id.field_pounds);
-        button_calculate = findViewById(R.id.button_calculate);
+        field_cm = findViewById(R.id.field_cm);
+
+        field_weight = findViewById(R.id.field_weight);
+        space_height = findViewById(R.id.space_height);
+
+        label_height = findViewById(R.id.label_height);
+        label_weight = findViewById(R.id.label_weight);
+
+
+        radioGroup = findViewById(R.id.radio_group);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioCategory = group.findViewById(checkedId);
+                String radioText = radioCategory.getText().toString();
+
+                if (radioText.equals("Standard")){{
+                    field_feet.setVisibility(View.VISIBLE);
+                    space_height.setVisibility(View.VISIBLE);
+                    field_inches.setVisibility(View.VISIBLE);
+                    field_cm.setVisibility(View.GONE);
+
+                    field_feet.setText(null);
+                    field_cm.setText(null);
+                    field_feet.setText(null);
+                    field_inches.setText(null);
+                    field_weight.setText(null);
+
+                    label_height.setText("Height(ft & in)");
+                    label_weight.setText("Weight(lbs)");
+
+
+                }}
+
+                else if (radioText.equals("Metric")){
+                    field_feet.setVisibility(View.INVISIBLE);
+                    space_height.setVisibility(View.INVISIBLE);
+                    field_inches.setVisibility(View.INVISIBLE);
+                    field_cm.setVisibility(View.VISIBLE);
+
+                    field_feet.setText(null);
+                    field_cm.setText(null);
+                    field_feet.setText(null);
+                    field_inches.setText(null);
+                    field_weight.setText(null);
+
+
+                    label_height.setText("Height(cm)");
+                    label_weight.setText("Weight(kg)");
+
+                }
+
+                Toast.makeText(MainBMICalculator.this, radioCategory.getText().toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        button_submit = findViewById(R.id.button_submit);
         // Test logout button
-        button_logout = findViewById(R.id.button_logout);
+//        button_logout = findViewById(R.id.button_logout);
+//        button_logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                SharedPreferences preferences = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE);
+//                preferences.edit().remove(PreferencesKeys.USER_LOGGED_IN).apply();
+//
+//                Intent i = new Intent(getApplicationContext(), Login.class);
+//                startActivity(i);
+//                finish();
+//            }
+//        });
 
-        label_result = findViewById(R.id.label_bmi_category);
-        spinner_bmi_category = findViewById(R.id.spinner_bmi_category);
-
-        spinner_bmi_category.setOnItemSelectedListener(this);
-
-        list_bmi_category.add("Standard");
-        list_bmi_category.add("Metric");
-        ArrayAdapter<String> adapter_bmi_category = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list_bmi_category);
-        spinner_bmi_category.setAdapter(adapter_bmi_category);
-
-
-        button_calculate.setOnClickListener(new View.OnClickListener() {
+        button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     double result = 0;
-                    if (spinner_bmi_category.getSelectedItem().toString().equals("Standard")) {
+                    if (radioCategory.getText().equals("Standard")) {
                         double feet = Double.parseDouble(field_feet.getText().toString());
                         double inches = Double.parseDouble(field_inches.getText().toString());
-                        double pounds = Double.parseDouble(field_pounds.getText().toString());
+                        double pounds = Double.parseDouble(field_weight.getText().toString());
                         result = calculateStandard(feet, inches, pounds);
 
                         double totalInches = (feet * 12) + inches;
@@ -77,10 +135,9 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
                         // TODO: If metric, convert the values back to standard before inserting into the databases
                         sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
 
-                    } else if (spinner_bmi_category.getSelectedItem().toString().equals("Metric")) {
+                    } else if (radioCategory.getText().equals("Metric")) {
                         double centimeters = Double.parseDouble(field_feet.getText().toString());
-                        double kilograms = Double.parseDouble(field_pounds.getText().toString());
-
+                        double kilograms = Double.parseDouble(field_weight.getText().toString());
                         result = calculateMetric(centimeters, kilograms);
                     }
 
@@ -95,55 +152,6 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
 
             }
         });
-
-        button_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SharedPreferences preferences = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE);
-                preferences.edit().remove(PreferencesKeys.USER_LOGGED_IN).apply();
-
-                Intent i = new Intent(getApplicationContext(), Login.class);
-                startActivity(i);
-                finish();
-            }
-        });
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String item = parent.getItemAtPosition(position).toString();
-        switch (item){
-            case "Standard":
-                field_inches.setText(null);
-                field_inches.setVisibility(View.VISIBLE);
-
-                field_feet.setText(null);
-                field_feet.setHint("Feet");
-
-                field_pounds.setHint("Pounds");
-                field_pounds.setText(null);
-
-                Toast.makeText(this, "STANDARD", Toast.LENGTH_SHORT).show();
-                break;
-            case "Metric":
-                field_inches.setText(null);
-                field_inches.setVisibility(View.INVISIBLE);
-
-                field_feet.setText(null);
-                field_feet.setHint("Centimeters");
-
-                field_pounds.setText(null);
-                field_pounds.setHint("Kilograms");
-                Toast.makeText(this, "METRIC", Toast.LENGTH_SHORT).show();
-            default:
-                Toast.makeText(this, "NOTHING", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
