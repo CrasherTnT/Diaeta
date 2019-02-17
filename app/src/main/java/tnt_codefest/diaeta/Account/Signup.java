@@ -20,6 +20,7 @@ public class Signup extends AppCompatActivity {
     private SQLiteHelper sqLiteHelper;
 
     private EditText fname, lname, username, password, confirmation;
+    private String FirstName, LastName, UserName, Password, Confirmation;
     private Button signup;
 
     @Override
@@ -40,67 +41,62 @@ public class Signup extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( fname.getText().toString().isEmpty() ||
-                        lname.getText().toString().isEmpty() ||
-                        username.getText().toString().isEmpty() ||
-                        password.getText().toString().isEmpty() ||
-                        confirmation.getText().toString().isEmpty()){
-                    toastMessage("Please fill out all the fields!");
+                FirstName = fname.getText().toString();
+                LastName = lname.getText().toString();
+                UserName = username.getText().toString();
+                Password = password.getText().toString();
+                Confirmation = confirmation.getText().toString();
+
+                if(!(   FirstName.isEmpty() ||
+                        LastName.isEmpty() ||
+                        UserName.isEmpty() ||
+                        Password.isEmpty() ||
+                        Confirmation.isEmpty())) {
+
+                    if (UserName.length() > 4) {
+                        if (!usernameExists(UserName)) {
+                            if(Password.equals(Confirmation)){
+                                sqLiteHelper.addUser(UserName, Password, FirstName, LastName, 0, 0, 0, 0);
+                                toastMessage("User successfully Inserted into the database");
+                            }
+                            else{
+                                toastMessage("Passwords do not match!");
+                            }
+                        } else {
+                            toastMessage("Username already taken");
+                        }
+                    } else{
+                        toastMessage("Username too short");
+                    }
                 }
                 else{
-                    if(usernameExists(username.getText().toString())){
-                        // Do something if username exists
-                        toastMessage("User already exists!");
-                    }
-                    else{
-                        if(password.getText().toString().equals(confirmation.getText().toString())){
-                            // If successfully inserted data
-                            // Hash password
-                            String salt = PasswordUtil.getSalt(30);
-                            String mySecurePassword = PasswordUtil.generateSecurePassword(password.getText().toString(), salt);
-
-                            sqLiteHelper.addUser(username.getText().toString(), mySecurePassword, salt, fname.getText().toString(), lname.getText().toString(),
-                                    0, 0, 0, 0);
-
-                            Log.d("DATABASE","User Successfully Added to the database");
-
-                            // Go to next activity
-                            int index = 0;
-                            Cursor c = sqLiteHelper.getUser();
-                            if(c.moveToLast()){
-                                index = c.getInt(0);
-                            }
-                            c.close();
-                            Intent i = new Intent(getApplicationContext(), MainBMICalculator.class);
-                            i.putExtra("USER_ID", index);
-                            startActivity(i);
-                        }
-                        else{
-                            toastMessage("Passwords do not match!");
-                        }
-                    }
+                    toastMessage("Please fill out everything!");
                 }
             }
         });
     }
 
     private boolean usernameExists(String username){
-        Cursor user = sqLiteHelper.findUser(username);
-        int count = 0;
-        while(user.moveToNext()){
-            count++;
+        try {
+            Cursor user = sqLiteHelper.findUser(username);
+            int count = 0;
+            while (user.moveToNext()) {
+                count++;
+            }
+            user.close();
+            if (count > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        user.close();
-        if(count > 0){
-            return true;
-        }
-        else{
+        catch(Exception e){
             return false;
         }
     }
 
     // Toast Message
     private void toastMessage(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

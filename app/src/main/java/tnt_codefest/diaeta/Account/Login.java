@@ -22,10 +22,12 @@ public class Login extends AppCompatActivity {
     private EditText username, password;
     private Button login, signup;
 
+    private String Username, Password;
+
     private int userIndex = 0;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing_page);
 
@@ -35,54 +37,36 @@ public class Login extends AppCompatActivity {
         password = (EditText)findViewById(R.id.field_password);
 
         login = (Button)findViewById(R.id.button_login);
-        signup = (Button)findViewById(R.id.button_signup);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validateAccount(username.getText().toString(), password.getText().toString())){
-                    // Successfully Logged In
-                    Log.d("DATABASE","Database working.");
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                    // TODO: Change the MainActivity.class
-                    i.putExtra("USER_INDEX", userIndex);
+                Username = username.getText().toString();
+                Password = password.getText().toString();
+
+                String confirmPass = "";
+                try{
+                    Cursor ver = sqLiteHelper.findUser(Username);
+                    while(ver.moveToNext()){
+                        userIndex = ver.getInt(0);
+                        confirmPass = ver.getString(2);
+                    }ver.close();
+                }catch(Exception e){
+                    toastMessage("Something went wrong.");
+                }
+
+                if(Password.equals(confirmPass)){
+                    // TODO: Change Activity if conditions were met
+                    toastMessage("Successfully logged in!");
                 }
                 else{
-                    toastMessage("Username or Password is either incorrect");
+                    toastMessage("Incorrect Username or Password!");
                 }
             }
         });
-
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Signup.class);
-                startActivity(i);
-            }
-        });
-
-
-    }
-
-    private boolean validateAccount(String username, String password){
-        Cursor userData = sqLiteHelper.findUser(username);
-        while(userData.moveToNext()){
-
-            String securePassword = userData.getString(2);
-            String salt = userData.getString(3);
-
-            boolean passwordMatch = PasswordUtil.verifyUserPassword(password, securePassword, salt);
-
-            if(passwordMatch) {
-                userIndex = userData.getInt(0);
-                return true;
-            }
-        }
-        userData.close();
-        return false;
     }
 
     private void toastMessage(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

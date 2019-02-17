@@ -18,8 +18,8 @@
         </activity>
         <activity android:name=".BMI_Calculator.MainBMICalculator" />
         <activity android:name=".BMI_Calculator.WeightClassification" />
-        <activity android:name=".Account.Login"/>
-        <activity android:name=".Account.Signup"/>
+        <activity android:name=".Account.Login" />
+        <activity android:name=".Account.Signup" />
     </application>
 
 </manifest>
