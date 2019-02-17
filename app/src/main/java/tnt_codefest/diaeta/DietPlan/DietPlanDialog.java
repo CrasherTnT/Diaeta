@@ -11,15 +11,19 @@ import java.util.ArrayList;
 
 public class DietPlanDialog extends AppCompatDialogFragment {
     private TaskListener listener;
-    final CharSequence[] items = {" 2 Eggs"," 1 Hotdog"," 1 Cup of Rice "," 8 Glasses of Water "};
     final ArrayList selectedItems =new ArrayList();
 
     // To set the day in the dialog
 
     private int day;
+    private CharSequence[] tasks;
+
 
     public void setDay(int day){
         this.day = day;
+    }
+    public void setTasks(CharSequence[] tasks){
+        this.tasks = tasks;
     }
 
     @Override
@@ -27,16 +31,20 @@ public class DietPlanDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle("DAY " + day)
-                .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                .setMultiChoiceItems(tasks, null, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int index, boolean isChecked) {
-                        if (isChecked){
-                            selectedItems.add(items[index]);
+                        switch (index){
+                            case 0:
+                                if (isChecked){
+                                    selectedItems.add(tasks[index]);
+                                }
+                                else{
+                                    selectedItems.remove(tasks[index]);
+                                }
                         }
-                        else{
-                            selectedItems.remove(items[index]);
                         }
-                    }
+
                 })
                 .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
                     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ public class MainBMICalculator extends AppCompatActivity{
     private RadioButton radioCategory;
     private Button button_submit, button_logout;
     private TextView label_height, label_weight;
+    String radioText = "Standard";
 //    private Spinner spinner_bmi_category;
 
     private SQLiteHelper sqLiteHelper;
@@ -60,16 +62,14 @@ public class MainBMICalculator extends AppCompatActivity{
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 radioCategory = group.findViewById(checkedId);
-                String radioText = radioCategory.getText().toString();
 
-                if (radioText.equals("Standard")){{
+                if (radioCategory.getText().equals("Standard")){{
+                    radioText = "Standard";
                     field_feet.setVisibility(View.VISIBLE);
                     space_height.setVisibility(View.VISIBLE);
                     field_inches.setVisibility(View.VISIBLE);
                     field_cm.setVisibility(View.GONE);
 
-                    field_feet.setText(null);
-                    field_cm.setText(null);
                     field_feet.setText(null);
                     field_inches.setText(null);
                     field_weight.setText(null);
@@ -80,25 +80,22 @@ public class MainBMICalculator extends AppCompatActivity{
 
                 }}
 
-                else if (radioText.equals("Metric")){
-                    field_feet.setVisibility(View.INVISIBLE);
-                    space_height.setVisibility(View.INVISIBLE);
-                    field_inches.setVisibility(View.INVISIBLE);
+                else {
+                    radioText = "Metric";
+                    field_feet.setVisibility(View.GONE);
+                    space_height.setVisibility(View.GONE);
+                    field_inches.setVisibility(View.GONE);
                     field_cm.setVisibility(View.VISIBLE);
 
-                    field_feet.setText(null);
                     field_cm.setText(null);
-                    field_feet.setText(null);
-                    field_inches.setText(null);
                     field_weight.setText(null);
 
 
                     label_height.setText("Height(cm)");
                     label_weight.setText("Weight(kg)");
-
                 }
-
                 Toast.makeText(MainBMICalculator.this, radioCategory.getText().toString(), Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -124,7 +121,7 @@ public class MainBMICalculator extends AppCompatActivity{
             public void onClick(View v) {
                 try {
                     double result = 0;
-                    if (radioCategory.getText().equals("Standard")) {
+                    if (radioText.equals("Standard")) {
                         double feet = Double.parseDouble(field_feet.getText().toString());
                         double inches = Double.parseDouble(field_inches.getText().toString());
                         double pounds = Double.parseDouble(field_weight.getText().toString());
@@ -135,10 +132,16 @@ public class MainBMICalculator extends AppCompatActivity{
                         // TODO: If metric, convert the values back to standard before inserting into the databases
                         sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
 
-                    } else if (radioCategory.getText().equals("Metric")) {
-                        double centimeters = Double.parseDouble(field_feet.getText().toString());
+                    } else {
+                        double centimeters = Double.parseDouble(field_cm.getText().toString());
                         double kilograms = Double.parseDouble(field_weight.getText().toString());
                         result = calculateMetric(centimeters, kilograms);
+
+                        //Converting from metric to standard values
+                        double totalInches = centimeters / 2.54;
+                        double pounds = kilograms / 2.205;
+                        sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
+
                     }
 
                     Intent intent = new Intent(getApplicationContext(), WeightClassification.class);
@@ -147,7 +150,7 @@ public class MainBMICalculator extends AppCompatActivity{
                     startActivity(intent);
                 }
                 catch(Exception e){
-                    // In case of error
+                    Log.d("ERROR CATEGORY", e.getMessage());
                 }
 
             }

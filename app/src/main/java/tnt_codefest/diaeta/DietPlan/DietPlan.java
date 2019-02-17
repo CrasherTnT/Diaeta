@@ -14,6 +14,7 @@ import tnt_codefest.diaeta.R;
 public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskListener {
     private CardView day1, day2, day3, day4, day5, day6, day7;
     private TextView label_percentage;
+    private CharSequence[] tasks_day1 = {" 2 Eggs"," 1 Hotdog"," 1 Cup of Rice "," 8 Glasses of Water "};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +32,16 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
         day1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog(1);
+                openDialog(1, tasks_day1);
             }
         });
 
     }
 
-    public void openDialog(int day){
+    public void openDialog(int day, CharSequence[] tasks){
         DietPlanDialog dietPlanDialog = new DietPlanDialog();
         dietPlanDialog.setDay(day);
+        dietPlanDialog.setTasks(tasks);
         dietPlanDialog.show(getSupportFragmentManager(), "Diet Plan");
     }
 
