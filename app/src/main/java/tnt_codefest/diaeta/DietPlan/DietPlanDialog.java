@@ -6,28 +6,35 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
-
 import java.util.ArrayList;
 
-public class DietPlanDialog extends AppCompatDialogFragment {
 
+public class DietPlanDialog extends AppCompatDialogFragment {
     private TaskListener listener;
-    final CharSequence[] day1 = {" 2 Eggs"," 1 Hotdog"," 1 Cup of Rice "," 8 Glasses of Water "};
+    final CharSequence[] items = {" 2 Eggs"," 1 Hotdog"," 1 Cup of Rice "," 8 Glasses of Water "};
     final ArrayList selectedItems =new ArrayList();
+
+    // To set the day in the dialog
+
+    private int day;
+
+    public void setDay(int day){
+        this.day = day;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setTitle("DAY #")
-                .setMultiChoiceItems(day1, null, new DialogInterface.OnMultiChoiceClickListener() {
+        builder.setTitle("DAY " + day)
+                .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int index, boolean isChecked) {
                         if (isChecked){
-                            selectedItems.add(day1[index]);
+                            selectedItems.add(items[index]);
                         }
                         else{
-                            selectedItems.remove(day1[index]);
+                            selectedItems.remove(items[index]);
                         }
                     }
                 })
