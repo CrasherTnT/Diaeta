@@ -136,7 +136,7 @@ public class MainBMICalculator extends AppCompatActivity{
                         sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
 
                     } else if (radioCategory.getText().equals("Metric")) {
-                        double centimeters = Double.parseDouble(field_feet.getText().toString());
+                        double centimeters = Double.parseDouble(field_cm.getText().toString());
                         double kilograms = Double.parseDouble(field_weight.getText().toString());
                         result = calculateMetric(centimeters, kilograms);
                     }
