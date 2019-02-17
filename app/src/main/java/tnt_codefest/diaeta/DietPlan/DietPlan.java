@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,6 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
         day5 = findViewById(R.id.cardview_day5);
         day6 = findViewById(R.id.cardview_day6);
         day7 = findViewById(R.id.cardview_day7);
-        label_percentage = findViewById(R.id.label_percentage);
 
         day1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,12 +43,12 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
     }
 
     @Override
-    public void completeTasks(ArrayList<String> list_task) {
+    public void completeTasks(ArrayList list_task) {
         String final_selection = "";
 
-        for (String task :list_task){
+        for (Object task :list_task){
             final_selection = final_selection + task + "\n";
         }
-        label_percentage.setText(final_selection);
+        Toast.makeText(this, final_selection, Toast.LENGTH_SHORT).show();
     }
 }
