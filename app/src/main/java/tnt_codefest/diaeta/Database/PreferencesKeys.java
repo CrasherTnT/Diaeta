@@ -7,4 +7,6 @@ public class PreferencesKeys {
     public static final String USER_LOGGED_IN = "LoggedIn";
     public static final String USER_ID = "UserID";
 
+    public static final String USER_BMI_CHECKED = "BMI_CHECKED";
+
 }

@@ -31,14 +31,15 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
         day1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog();
+                openDialog(1);
             }
         });
 
     }
 
-    public void openDialog(){
+    public void openDialog(int day){
         DietPlanDialog dietPlanDialog = new DietPlanDialog();
+        dietPlanDialog.setDay(day);
         dietPlanDialog.show(getSupportFragmentManager(), "Diet Plan");
     }
 
