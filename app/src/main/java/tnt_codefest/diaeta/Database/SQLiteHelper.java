@@ -83,6 +83,20 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean addBMI(int id, double height, double weight, double bmi){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USER_HEIGHT, height);
+        contentValues.put(USER_WEIGHT, weight);
+        contentValues.put(USER_BMI, bmi);
+
+        long results = db.update(USER_TABLE, contentValues, USER_ID+"="+id, null);
+        if(results == -1)
+            return false;
+        else
+            return true;
+    }
+
     // GET METHODS
 
     public Cursor getUser(){

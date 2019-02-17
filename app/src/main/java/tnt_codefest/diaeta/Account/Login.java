@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import tnt_codefest.diaeta.BMI_Calculator.MainBMICalculator;
 import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.MainActivity;
 import tnt_codefest.diaeta.R;
@@ -57,13 +58,26 @@ public class Login extends AppCompatActivity {
 
                 if(Password.equals(confirmPass)){
                     // TODO: Change Activity if conditions were met
-                    toastMessage("Successfully logged in!");
+                    Intent i = new Intent(getApplicationContext(), MainBMICalculator.class);
+                    i.putExtra("USER_ID", userIndex);
+                    startActivity(i);
                 }
                 else{
-                    toastMessage("Incorrect Username or Password!");
+                    toastMessage("Incorrect Username or Password!-");
                 }
             }
         });
+
+        signup = (Button)findViewById(R.id.button_signup);
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Signup.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     private void toastMessage(String message){

@@ -56,8 +56,25 @@ public class Signup extends AppCompatActivity {
                     if (UserName.length() > 4) {
                         if (!usernameExists(UserName)) {
                             if(Password.equals(Confirmation)){
-                                sqLiteHelper.addUser(UserName, Password, FirstName, LastName, 0, 0, 0, 0);
-                                toastMessage("User successfully Inserted into the database");
+                                if(Password.length() >= 8){
+                                    sqLiteHelper.addUser(UserName, Password, FirstName, LastName, 0, 0, 0, 0);
+                                    int user_id = 0;
+                                    // TODO: DO NOTHING
+                                    // Getting the user's id in the database
+//                                    Cursor user = sqLiteHelper.findUser(UserName);
+//                                    while(user.moveToNext()){
+//                                        // Get the last inserted index
+//                                        user_id = user.getInt(0);
+//                                    }
+//                                    user.close();
+
+                                    Intent i = new Intent(getApplicationContext(), Login.class);
+//                                    i.putExtra("USER_ID", user_id);
+                                    startActivity(i);
+                                }
+                                else{
+                                    toastMessage("Password should be 8 characters or more");
+                                }
                             }
                             else{
                                 toastMessage("Passwords do not match!");

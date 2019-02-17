@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.R;
 
 
@@ -23,6 +24,9 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
     private TextView label_result;
     private Spinner spinner_bmi_category;
 
+    private SQLiteHelper sqLiteHelper;
+    private int USER_ID;
+
     ArrayList<String> list_bmi_category = new ArrayList<>();
 
 
@@ -30,6 +34,11 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bmi_calculator);
+
+        sqLiteHelper = new SQLiteHelper(getApplicationContext());
+
+        Intent i = getIntent();
+        USER_ID = i.getIntExtra("USER_ID", 0);
 
         field_feet = findViewById(R.id.field_feet);
         field_inches = findViewById(R.id.field_inches);
@@ -49,25 +58,34 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
         button_calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double result = 0;
-                if (spinner_bmi_category.getSelectedItem().toString().equals("Standard")){
-                    double feet = Double.parseDouble(field_feet.getText().toString());
-                    double inches = Double.parseDouble(field_inches.getText().toString());
-                    double pounds = Double.parseDouble(field_pounds.getText().toString());
+                try {
+                    double result = 0;
+                    if (spinner_bmi_category.getSelectedItem().toString().equals("Standard")) {
+                        double feet = Double.parseDouble(field_feet.getText().toString());
+                        double inches = Double.parseDouble(field_inches.getText().toString());
+                        double pounds = Double.parseDouble(field_pounds.getText().toString());
+                        result = calculateStandard(feet, inches, pounds);
 
-                    result = calculateStandard(feet, inches, pounds);
+                        double totalInches = (feet * 12) + inches;
+
+                        // TODO: If metric, convert the values back to standard before inserting into the databases
+                        sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
+
+                    } else if (spinner_bmi_category.getSelectedItem().toString().equals("Metric")) {
+                        double centimeters = Double.parseDouble(field_feet.getText().toString());
+                        double kilograms = Double.parseDouble(field_pounds.getText().toString());
+
+                        result = calculateMetric(centimeters, kilograms);
+                    }
+
+                    Intent intent = new Intent(getApplicationContext(), WeightClassification.class);
+                    intent.putExtra("result_bmi", result);
+                    intent.putExtra("USER_ID", USER_ID);
+                    startActivity(intent);
                 }
-                else if (spinner_bmi_category.getSelectedItem().toString().equals("Metric")){
-                    double centimeters = Double.parseDouble(field_feet.getText().toString());
-                    double kilograms = Double.parseDouble(field_pounds.getText().toString());
+                catch(Exception e){
 
-                    result = calculateMetric(centimeters ,kilograms);
                 }
-
-                Intent intent = new Intent(getApplicationContext(), WeightClassification.class);
-                intent.putExtra("result_bmi", result);
-                startActivity(intent);
-
 
             }
         });
