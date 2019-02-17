@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import tnt_codefest.diaeta.Database.SQLiteHelper;
+import tnt_codefest.diaeta.DietPlan.DietPlan;
 import tnt_codefest.diaeta.R;
 
 public class WeightClassification extends AppCompatActivity {
@@ -14,6 +17,7 @@ public class WeightClassification extends AppCompatActivity {
     private SQLiteHelper sqLiteHelper;
 
     private TextView label_bmi_category, label_yourname;
+    private Button button_diet_plan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,16 @@ public class WeightClassification extends AppCompatActivity {
             label_bmi_category.setText("OBESE: " + String.valueOf(result));
 
         }
+
+        button_diet_plan = findViewById(R.id.button_diet_plan);
+
+        button_diet_plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DietPlan.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
