@@ -71,7 +71,6 @@
                         android:id="@+id/radioButton_standard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignleft="@+id/radioButton"
                         android:layout_marginLeft="23dp"
                         android:layout_marginTop="220dp"
                         android:text="Standard" />

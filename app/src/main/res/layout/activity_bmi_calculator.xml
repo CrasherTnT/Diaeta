@@ -83,6 +83,16 @@
             android:text="Calculate" />
 
 
+        <!-- TEST BUTTON FOR LOGOUT -->
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Logout" />
+
     </LinearLayout>
+
+
 
 </LinearLayout>

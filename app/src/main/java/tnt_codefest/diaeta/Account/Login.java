@@ -1,6 +1,7 @@
 package tnt_codefest.diaeta.Account;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import tnt_codefest.diaeta.BMI_Calculator.MainBMICalculator;
+import tnt_codefest.diaeta.Database.PreferencesKeys;
 import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.MainActivity;
 import tnt_codefest.diaeta.R;
@@ -60,6 +62,13 @@ public class Login extends AppCompatActivity {
                     // TODO: Change Activity if conditions were met
                     Intent i = new Intent(getApplicationContext(), MainBMICalculator.class);
                     i.putExtra("USER_ID", userIndex);
+
+                    // Setting SharedPreferences
+                    SharedPreferences.Editor editor = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putBoolean(PreferencesKeys.USER_LOGGED_IN, true);
+                    editor.putInt(PreferencesKeys.USER_ID, userIndex);
+                    editor.apply();
+
                     startActivity(i);
                 }
                 else{

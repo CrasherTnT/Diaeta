@@ -1,6 +1,7 @@
 package tnt_codefest.diaeta.BMI_Calculator;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,13 +15,15 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import tnt_codefest.diaeta.Account.Login;
+import tnt_codefest.diaeta.Database.PreferencesKeys;
 import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.R;
 
 
 public class MainBMICalculator extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private EditText field_feet, field_inches, field_pounds;
-    private Button button_calculate;
+    private Button button_calculate, button_logout;
     private TextView label_result;
     private Spinner spinner_bmi_category;
 
@@ -44,6 +47,9 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
         field_inches = findViewById(R.id.field_inches);
         field_pounds = findViewById(R.id.field_pounds);
         button_calculate = findViewById(R.id.button_calculate);
+        // Test logout button
+        button_logout = findViewById(R.id.button_logout);
+
         label_result = findViewById(R.id.label_bmi_category);
         spinner_bmi_category = findViewById(R.id.spinner_bmi_category);
 
@@ -89,6 +95,20 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
 
             }
         });
+
+        button_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences preferences = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE);
+                preferences.edit().remove(PreferencesKeys.USER_LOGGED_IN).apply();
+
+                Intent i = new Intent(getApplicationContext(), Login.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
     }
 
     @Override
@@ -138,5 +158,9 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
         return (double) Math.round(((kilograms / centimeters / centimeters) * 10000) * 100.0) / 100.0;
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), "You can't escape!", Toast.LENGTH_SHORT).show();
+        return;
+    }
 }
