@@ -28,6 +28,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String USER_WEIGHT = "weight";
     private static final String USER_BMI = "bmi";
     private static final String CURRENT_WEEK = "current_week";
+    private static final String USER_AGE = "user_age";
 
     // Create User table
 
@@ -40,20 +41,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             USER_HEIGHT + " DOUBLE, " +
             USER_WEIGHT + " DOUBLE, " +
             USER_BMI + " DOUBLE, " +
-            CURRENT_WEEK + " INTEGER);";
+            CURRENT_WEEK + " INTEGER, " +
+            USER_AGE + " INTEGER );";
 
     // task table
     private static final String TASK_TABLE = "task";
     private static final String TASK_ID = "task_id";
     private static final String TASK_NAME = "task_name";
     private static final String TASK_ISFINISHED = "isFinished";
+    private static final String TASK_DAY = "task_day";
 
     // Create Task Table
     private static final String CREATE_TASK = "CREATE TABLE " + TASK_TABLE + "(" +
             TASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             TASK_NAME + " TEXT, " +
             TASK_ISFINISHED + " BOOLEAN ," +
-            USER_ID + " INTEGER );";
+            USER_ID + " INTEGER, " +
+            TASK_DAY + " INTEGER );";
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -75,7 +79,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     // ADD METHODS
 
     public boolean addUser(String userName, String password, String firstName, String lastName, double height, double weight, double bmi, int
-            current_week){
+            current_week, int age){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -99,13 +103,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     // ADD TASK
-    public boolean addTask(String task, boolean isFinished, int user_id){
+    public boolean addTask(String task, boolean isFinished, int user_id, int day){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(TASK_NAME, task);
         contentValues.put(TASK_ISFINISHED, isFinished);
         contentValues.put(USER_ID, user_id);
+        contentValues.put(TASK_DAY, day);
 
         long results = db.insert(TASK_TABLE, null, contentValues);
 
@@ -114,6 +119,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         else
             return true;
     }
+
+    // GET TASK
 
     public boolean addBMI(int id, double height, double weight, double bmi){
         SQLiteDatabase db = this.getWritableDatabase();

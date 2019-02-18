@@ -66,6 +66,9 @@ public class MainBMICalculator extends AppCompatActivity{
         label_height = findViewById(R.id.label_height);
         label_weight = findViewById(R.id.label_weight);
 
+        label_height.setText("Height(ft & in)");
+        label_weight.setText("Weight(lbs)");
+
 
         radioGroup = findViewById(R.id.radio_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -138,6 +141,10 @@ public class MainBMICalculator extends AppCompatActivity{
 
                         double totalInches = (feet * 12) + inches;
 
+                        totalInches = Math.round(((totalInches) * 10000) * 100.0) / 100.0;
+                        pounds = Math.round(((pounds) * 10000) * 100.0) / 100.0;
+
+
                         // TODO: If metric, convert the values back to standard before inserting into the databases
                         sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
                         checkPreference();
@@ -150,6 +157,10 @@ public class MainBMICalculator extends AppCompatActivity{
                         //Converting from metric to standard values
                         double totalInches = centimeters / 2.54;
                         double pounds = kilograms / 2.205;
+
+                        totalInches = Math.round(((totalInches) * 10000) * 100.0) / 100.0;
+                        pounds = Math.round(((pounds) * 10000) * 100.0) / 100.0;
+
                         sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
                         checkPreference();
 

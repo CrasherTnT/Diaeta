@@ -13,7 +13,7 @@ tools:context="tnt_codefest.diaeta.DietPlan.DietPlan">
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="100dp">
 
         <ImageView
             android:id="@+id/weekly"
@@ -37,6 +37,31 @@ tools:context="tnt_codefest.diaeta.DietPlan.DietPlan">
             android:layout_toRightOf="@+id/diet"
             android:layout_marginTop="38dp"
             android:layout_marginLeft="5dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/diet"
+            android:layout_marginBottom="-20dp">
+
+            <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:minHeight="10dp"
+            android:minWidth="200dp"
+            android:progressTint="#FF0D0D"
+            android:progress="1"
+            android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <ScrollView

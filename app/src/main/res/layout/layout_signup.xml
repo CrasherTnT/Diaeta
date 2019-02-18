@@ -80,31 +80,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/field_last_name"
-                android:layout_alignParentRight="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
+                android:paddingLeft="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="60dp"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
+                android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/spinner_month"
-                    android:layout_width="50dp"
-                    android:layout_height="26dp"
-                    android:layout_marginRight="5dp"></Spinner>
-
-                <Spinner
-                    android:id="@+id/spinner_day"
-                    android:layout_width="50dp"
-                    android:layout_height="26dp"
-                    android:layout_marginRight="5dp"></Spinner>
-
-                <Spinner
-                    android:id="@+id/spinner_year"
-                    android:layout_width="50dp"
-                    android:layout_height="26dp"
-                    android:layout_marginRight="5dp"></Spinner>
+                <EditText
+                    android:id="@+id/field_date"
+                    android:clickable="true"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edit_round"
+                    android:paddingLeft="20dp"
+                    android:hint="MM-DD-YY"
+                    android:editable="false"
+                    />
 
 
             </LinearLayout>

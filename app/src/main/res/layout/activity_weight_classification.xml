@@ -42,8 +42,9 @@
         android:id="@+id/label_yourname"
         android:textSize="20dp"
         android:textAlignment="center"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="TextView" />
 
     <Button
@@ -51,4 +52,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CONTINUE" />
+
+    <Button
+        android:id="@+id/button_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Home" />
 </LinearLayout>
