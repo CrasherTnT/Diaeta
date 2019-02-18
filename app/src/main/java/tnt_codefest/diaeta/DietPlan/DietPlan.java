@@ -1,5 +1,6 @@
 package tnt_codefest.diaeta.DietPlan;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import tnt_codefest.diaeta.Database.PreferencesKeys;
+import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.R;
 
 public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskListener {
@@ -24,6 +27,7 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
 
     private ProgressBar progressBar;
 
+    private SQLiteHelper sqLiteHelper;
 
     // TODO: HELP ME
 
@@ -31,6 +35,17 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_plan);
+
+        sqLiteHelper = new SQLiteHelper(getApplicationContext());
+
+        // Get User ID
+        SharedPreferences prefs = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE);
+        int user_id = prefs.getInt(PreferencesKeys.USER_ID, 0);
+
+        // Populate database
+        for(CharSequence task : tasks_day1){
+            sqLiteHelper.addTask(task.toString(), false, user_id, 0);
+        }
 
         day1 = findViewById(R.id.cardview_day1);
         day2 = findViewById(R.id.cardview_day2);
