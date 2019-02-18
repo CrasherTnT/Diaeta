@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="tnt_codefest.diaeta.profile">
+    tools:context="tnt_codefest.diaeta.Profile.Profile">
+
 <FrameLayout
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
@@ -58,7 +59,34 @@
         android:minWidth="200dp"
         android:progressTint="#FF0D0D"
         android:progress="50"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="ACHIEVEMENTS"
+        android:translationY="400dp"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="25dp"
+        android:textColor="#00A706"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="25dp"
+        android:translationY="440dp"
+        android:background="@drawable/achievement_1"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="150dp"
+        android:translationY="440dp"
+        android:background="@drawable/achievement_2"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="270dp"
+        android:translationY="440dp"
+        android:background="@drawable/achievement_3"/>
     <TextView
         android:id="@+id/percentage"
         android:layout_width="wrap_content"
@@ -129,6 +157,17 @@
         android:translationX="270dp"
         android:translationY="440dp"
         android:background="@drawable/achievement_3"/>
-</FrameLayout>
+    </FrameLayout>
 
-</RelativeLayout>
+    <android.support.design.widget.NavigationView
+        app:headerLayout="@layout/drawer_header"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:itemTextColor="@color/darkgrey"
+        app:itemIconTint="@color/darkgrey"
+        app:menu="@menu/drawer_menu"
+        android:layout_gravity="start">
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>
