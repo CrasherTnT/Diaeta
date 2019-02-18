@@ -28,6 +28,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String USER_WEIGHT = "weight";
     private static final String USER_BMI = "bmi";
     private static final String CURRENT_WEEK = "current_week";
+    private static final String USER_AGE = "user_age";
 
     // Create User table
 
@@ -40,7 +41,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             USER_HEIGHT + " DOUBLE, " +
             USER_WEIGHT + " DOUBLE, " +
             USER_BMI + " DOUBLE, " +
-            CURRENT_WEEK + " INTEGER);";
+            CURRENT_WEEK + " INTEGER, " +
+            USER_AGE + " INTEGER );";
 
     // task table
     private static final String TASK_TABLE = "task";
@@ -75,7 +77,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     // ADD METHODS
 
     public boolean addUser(String userName, String password, String firstName, String lastName, double height, double weight, double bmi, int
-            current_week){
+            current_week, int age){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
