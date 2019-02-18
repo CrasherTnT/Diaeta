@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import tnt_codefest.diaeta.Account.Login;
 import tnt_codefest.diaeta.Database.PreferencesKeys;
 import tnt_codefest.diaeta.Database.SQLiteHelper;
+import tnt_codefest.diaeta.DietPlan.DietPlan;
 import tnt_codefest.diaeta.R;
 
 
@@ -37,6 +38,16 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bmi_calculator);
+
+        // Check if the user has already inserted bmi
+        // TODO: ASK FOR BMI IF WEEK HAS ALREADY PASSED
+        SharedPreferences prefs = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE);
+        Boolean bmiChecked = prefs.getBoolean(PreferencesKeys.USER_BMI_CHECKED, false);
+        if(bmiChecked){
+            Intent intent = new Intent(getApplicationContext(), DietPlan.class);
+            startActivity(intent);
+            finish();
+        }
 
         sqLiteHelper = new SQLiteHelper(getApplicationContext());
 
@@ -76,6 +87,11 @@ public class MainBMICalculator extends AppCompatActivity implements AdapterView.
 
                         // TODO: If metric, convert the values back to standard before inserting into the databases
                         sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
+
+                        SharedPreferences.Editor editor = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE).edit();
+                        editor.putBoolean(PreferencesKeys.USER_BMI_CHECKED, true);
+                        editor.apply();
+
 
                     } else if (spinner_bmi_category.getSelectedItem().toString().equals("Metric")) {
                         double centimeters = Double.parseDouble(field_feet.getText().toString());
