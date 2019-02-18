@@ -42,6 +42,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             USER_BMI + " DOUBLE, " +
             CURRENT_WEEK + " INTEGER);";
 
+    // task table
+    private static final String TASK_TABLE = "task";
+    private static final String TASK_ID = "task_id";
+    private static final String TASK_NAME = "task_name";
+    private static final String TASK_ISFINISHED = "isFinished";
+
+    // Create Task Table
+    private static final String CREATE_TASK = "CREATE TABLE " + TASK_TABLE + "(" +
+            TASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            TASK_NAME + " TEXT, " +
+            TASK_ISFINISHED + " BOOLEAN ," +
+            USER_ID + " INTEGER );";
+
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -49,11 +62,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER);
+        db.execSQL(CREATE_TASK);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + TASK_TABLE);
         onCreate(db);
     }
 
@@ -81,6 +96,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         else
             return true;
 
+    }
+
+    // ADD TASK
+    public boolean addTask(String task, boolean isFinished, int user_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TASK_NAME, task);
+        contentValues.put(TASK_ISFINISHED, isFinished);
+        contentValues.put(USER_ID, user_id);
+
+        long results = db.insert(TASK_TABLE, null, contentValues);
+
+        if(results == -1)
+            return false;
+        else
+            return true;
     }
 
     public boolean addBMI(int id, double height, double weight, double bmi){

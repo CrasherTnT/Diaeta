@@ -16,6 +16,8 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
     private TextView label_percentage;
     private CharSequence[] tasks_day1 = {" 2 Eggs"," 1 Hotdog"," 1 Cup of Rice "," 8 Glasses of Water "};
 
+    // TODO: HELP ME
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
