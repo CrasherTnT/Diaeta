@@ -17,8 +17,8 @@ import android.widget.Toast;
 import tnt_codefest.diaeta.Database.PreferencesKeys;
 import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.DietPlan.DietPlan;
+import tnt_codefest.diaeta.Profile.Profile;
 import tnt_codefest.diaeta.R;
-import tnt_codefest.diaeta.profile;
 
 
 public class MainBMICalculator extends AppCompatActivity{
@@ -48,7 +48,7 @@ public class MainBMICalculator extends AppCompatActivity{
         SharedPreferences prefs = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE);
         Boolean bmiChecked = prefs.getBoolean(PreferencesKeys.USER_BMI_CHECKED, false);
         if(bmiChecked){
-            Intent intent = new Intent(getApplicationContext(), profile.class);
+            Intent intent = new Intent(getApplicationContext(), Profile.class);
             startActivity(intent);
             finish();
         }
