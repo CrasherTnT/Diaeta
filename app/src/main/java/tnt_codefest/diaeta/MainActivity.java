@@ -16,6 +16,7 @@ import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.BMI_Calculator.MainBMICalculator;
 
 public class MainActivity extends AppCompatActivity {
+    //yezuz
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
