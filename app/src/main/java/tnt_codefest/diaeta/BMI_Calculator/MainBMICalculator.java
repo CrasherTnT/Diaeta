@@ -1,6 +1,7 @@
 package tnt_codefest.diaeta.BMI_Calculator;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +14,11 @@ import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import tnt_codefest.diaeta.Database.PreferencesKeys;
 import tnt_codefest.diaeta.Database.SQLiteHelper;
+import tnt_codefest.diaeta.DietPlan.DietPlan;
 import tnt_codefest.diaeta.R;
+import tnt_codefest.diaeta.profile;
 
 
 public class MainBMICalculator extends AppCompatActivity{
@@ -39,6 +43,15 @@ public class MainBMICalculator extends AppCompatActivity{
         setContentView(R.layout.activity_bmi_calculator);
 
         sqLiteHelper = new SQLiteHelper(getApplicationContext());
+
+        // TODO: ASK FOR BMI IF WEEK HAS ALREADY PASSED
+        SharedPreferences prefs = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE);
+        Boolean bmiChecked = prefs.getBoolean(PreferencesKeys.USER_BMI_CHECKED, false);
+        if(bmiChecked){
+            Intent intent = new Intent(getApplicationContext(), profile.class);
+            startActivity(intent);
+            finish();
+        }
 
         Intent i = getIntent();
         USER_ID = i.getIntExtra("USER_ID", 0);
@@ -127,6 +140,7 @@ public class MainBMICalculator extends AppCompatActivity{
 
                         // TODO: If metric, convert the values back to standard before inserting into the databases
                         sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
+                        checkPreference();
 
                     } else {
                         double centimeters = Double.parseDouble(field_cm.getText().toString());
@@ -137,6 +151,7 @@ public class MainBMICalculator extends AppCompatActivity{
                         double totalInches = centimeters / 2.54;
                         double pounds = kilograms / 2.205;
                         sqLiteHelper.addBMI(USER_ID, totalInches, pounds, result);
+                        checkPreference();
 
                     }
 
@@ -152,6 +167,12 @@ public class MainBMICalculator extends AppCompatActivity{
             }
         });
 
+    }
+
+    private void checkPreference(){
+        SharedPreferences.Editor editor = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putBoolean(PreferencesKeys.USER_BMI_CHECKED, true);
+        editor.apply();
     }
 
     private double calculateStandard(double feet, double inches, double pounds){
