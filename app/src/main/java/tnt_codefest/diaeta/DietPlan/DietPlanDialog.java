@@ -34,17 +34,12 @@ public class DietPlanDialog extends AppCompatDialogFragment {
                 .setMultiChoiceItems(tasks, null, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int index, boolean isChecked) {
-                        switch (index){
-                            case 0:
-                                if (isChecked){
-                                    selectedItems.add(tasks[index]);
-                                }
-                                else{
-                                    selectedItems.remove(tasks[index]);
-                                }
+                        if (isChecked) {
+                            selectedItems.add(tasks[index]);
+                        } else {
+                            selectedItems.remove(tasks[index]);
                         }
-                        }
-
+                    }
                 })
                 .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
                     @Override
