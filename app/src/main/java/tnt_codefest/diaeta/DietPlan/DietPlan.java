@@ -29,6 +29,8 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
 
     private SQLiteHelper sqLiteHelper;
 
+    private int user_id = 0;
+
     // TODO: HELP ME
 
     @Override
@@ -40,12 +42,8 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
 
         // Get User ID
         SharedPreferences prefs = getSharedPreferences(PreferencesKeys.MY_PREFS_NAME, MODE_PRIVATE);
-        int user_id = prefs.getInt(PreferencesKeys.USER_ID, 0);
+        user_id = prefs.getInt(PreferencesKeys.USER_ID, 0);
 
-        // Populate database
-        for(CharSequence task : tasks_day1){
-            sqLiteHelper.addTask(task.toString(), false, user_id, 0);
-        }
 
         day1 = findViewById(R.id.cardview_day1);
         day2 = findViewById(R.id.cardview_day2);
@@ -59,6 +57,10 @@ public class DietPlan extends AppCompatActivity implements DietPlanDialog.TaskLi
             @Override
             public void onClick(View v) {
                 openDialog(1, tasks_day1);
+                // Populate database
+                for(CharSequence task : tasks_day1){
+                    sqLiteHelper.addTask(task.toString(), false, user_id, 0);
+                }
             }
         });
         day2.setOnClickListener(new View.OnClickListener() {

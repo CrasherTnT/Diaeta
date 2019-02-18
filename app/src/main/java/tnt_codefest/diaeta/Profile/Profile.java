@@ -34,7 +34,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        drawerLayout=findViewById(R.id.drawer_layout);
+        drawerLayout= findViewById(R.id.drawer_layout);
 
         NavigationView NavView = findViewById(R.id.navigation_view);
         NavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
