@@ -112,24 +112,26 @@
             android:fontFamily="sans-serif-thin"
             android:textSize="25dp"
             android:textColor="#00A706"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:translationX="25dp"
-            android:translationY="440dp"
-            android:background="@drawable/achievement_1"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:translationX="150dp"
-            android:translationY="440dp"
-            android:background="@drawable/achievement_2"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:translationX="270dp"
-            android:translationY="440dp"
-            android:background="@drawable/achievement_3"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:translationX="25dp"
+                android:translationY="440dp"
+                android:background="@drawable/achievement_1"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:translationX="150dp"
+                android:translationY="440dp"
+                android:background="@drawable/achievement_2"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:translationX="270dp"
+                android:translationY="440dp"
+                android:background="@drawable/achievement_3"/>
+
     </FrameLayout>
 
     <android.support.design.widget.NavigationView
