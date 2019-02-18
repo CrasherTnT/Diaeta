@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_profile" android:title="Profile" android:icon="@drawable/profie"/>
+    <item android:id="@+id/nav_diet" android:title="Diet" android:icon="@drawable/salad"/>
+    <item android:id="@+id/nav_weight_class" android:title="Weight Class" android:icon="@drawable/scale_white"/>
+    <item android:id="@+id/nav_logout" android:title="Logout"/>
+</menu>
