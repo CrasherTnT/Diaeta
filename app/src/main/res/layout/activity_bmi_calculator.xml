@@ -133,7 +133,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/linear_height"
                 android:gravity="center"
-                android:text="Height(cm)" />
+                android:text="Height()" />
 
 
             <EditText
@@ -156,7 +156,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/field_weight"
                 android:gravity="center"
-                android:text="Weight(kg)" />
+                android:text="Weight()" />
 
             <Button
                 android:id="@+id/button_submit"

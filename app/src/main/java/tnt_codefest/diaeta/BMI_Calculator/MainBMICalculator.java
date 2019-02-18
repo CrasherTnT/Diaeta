@@ -66,6 +66,9 @@ public class MainBMICalculator extends AppCompatActivity{
         label_height = findViewById(R.id.label_height);
         label_weight = findViewById(R.id.label_weight);
 
+        label_height.setText("Height(ft & in)");
+        label_weight.setText("Weight(lbs)");
+
 
         radioGroup = findViewById(R.id.radio_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
