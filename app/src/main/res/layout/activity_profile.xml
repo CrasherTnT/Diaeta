@@ -138,7 +138,7 @@
             android:translationX="270dp"
             android:translationY="440dp"
             android:background="@drawable/achievement_3"/>
-    
+
     </FrameLayout>
 
     <android.support.design.widget.NavigationView

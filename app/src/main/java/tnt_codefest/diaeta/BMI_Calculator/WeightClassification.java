@@ -18,7 +18,7 @@ public class WeightClassification extends AppCompatActivity {
     private SQLiteHelper sqLiteHelper;
 
     private TextView label_bmi_category, label_yourname;
-    private Button button_diet_plan;
+    private Button button_diet_plan, button_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +60,22 @@ public class WeightClassification extends AppCompatActivity {
         }
 
         button_diet_plan = findViewById(R.id.button_diet_plan);
+        button_home = findViewById(R.id.button_home);
 
         button_diet_plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DietPlan.class);
+                startActivity(intent);
+            }
+        });
+
+        button_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Profile.class);
                 startActivity(intent);
             }
         });
-
     }
 }
