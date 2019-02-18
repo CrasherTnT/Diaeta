@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity {
                 Username = username.getText().toString();
                 Password = password.getText().toString();
 
-                String confirmPass = "";
+                String confirmPass = null;
                 try{
                     Cursor ver = sqLiteHelper.findUser(Username);
                     while(ver.moveToNext()){
@@ -58,7 +58,11 @@ public class Login extends AppCompatActivity {
                     toastMessage("Something went wrong.");
                 }
 
-                if(Password.equals(confirmPass)){
+
+                if(Username.isEmpty() || Password.isEmpty()){
+                    toastMessage("Incorrect Username or Password!");
+                }
+                else if(Password.equals(confirmPass)){
                     // TODO: Change Activity if conditions were met
                     Intent i = new Intent(getApplicationContext(), MainBMICalculator.class);
                     i.putExtra("USER_ID", userIndex);
@@ -72,7 +76,7 @@ public class Login extends AppCompatActivity {
                     startActivity(i);
                 }
                 else{
-                    toastMessage("Incorrect Username or Password!-");
+                    toastMessage("Incorrect Username or Password!");
                 }
             }
         });

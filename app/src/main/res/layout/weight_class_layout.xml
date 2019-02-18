@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@drawable/head"
-
-    >
+    android:background="@drawable/head">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -52,52 +50,91 @@
             <RadioGroup
                 android:id="@+id/radio_group"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/radioButton_standard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="220dp"
+                    android:text="Standard"
+                    android:checked="true"/>
 
-                    <RadioButton
-                        android:id="@+id/radioButton_metric"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="46dp"
-                        android:layout_marginTop="220dp"
-                        android:text="Metric" />
+                <RadioButton
+                    android:id="@+id/radioButton_metric"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="46dp"
+                    android:layout_marginTop="220dp"
+                    android:text="Metric" />
 
-                    <RadioButton
-                        android:id="@+id/radioButton_standard"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="23dp"
-                        android:layout_marginTop="220dp"
-                        android:text="Standard" />
-
-                </LinearLayout>
 
             </RadioGroup>
 
-            <EditText
-                android:id="@+id/field_height"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="280dp"
-                android:background="@drawable/edit_round"
-                android:ems="10"
-                android:inputType="number"
-                android:paddingLeft="20dp" />
+            <LinearLayout
+                android:id="@+id/linear_height"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+                <EditText
+                    android:id="@+id/field_cm"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="280dp"
+                    android:background="@drawable/edit_round"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:visibility="gone"/>
+                <EditText
+                    android:id="@+id/field_feet"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="280dp"
+                    android:background="@drawable/edit_round"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" />
+
+                <Space
+                    android:id="@+id/space_height"
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/field_inches"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@id/field_feet"
+                    android:layout_marginTop="280dp"
+                    android:background="@drawable/edit_round"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"/>
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/label_height"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/field_height"
+                android:layout_below="@+id/linear_height"
                 android:gravity="center"
                 android:text="Height(cm)" />
+
 
             <EditText
                 android:id="@+id/field_weight"
@@ -110,9 +147,11 @@
                 android:background="@drawable/edit_round"
                 android:ems="10"
                 android:inputType="number"
-                android:paddingLeft="20dp" />
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
 
             <TextView
+                android:id="@+id/label_weight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/field_weight"
