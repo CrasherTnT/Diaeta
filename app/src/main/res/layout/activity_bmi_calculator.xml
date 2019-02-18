@@ -1,173 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".BMI_Calculator.MainBMICalculator"
+    android:layout_width="match_parent"
     android:background="@drawable/head">
 
-    <LinearLayout
-        android:layout_centerVertical="true"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/label_letsee"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:paddingRight="120dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/lets_see"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="150dp"
+                android:paddingLeft="40dp"
                 android:text="Let's see your" />
 
-            <TextView
-                android:id="@+id/label_weightclass"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/label_letsee"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Weight Class"
-                android:textColor="#00A706"
-                android:textSize="35sp" />
+                android:layout_below="@id/lets_see"
+                android:orientation="horizontal"
+                android:paddingLeft="40dp">
 
-            <ImageView
-                android:layout_toRightOf="@+id/label_weightclass"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="45dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/scale" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight Class"
+                    android:textColor="#00A706"
+                    android:textSize="35sp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="45dp"
+                    android:src="@drawable/scale" />
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButton_standard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="220dp"
+                    android:text="Standard"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/radioButton_metric"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="46dp"
+                    android:layout_marginTop="220dp"
+                    android:text="Metric" />
 
 
-        </RelativeLayout>
+            </RadioGroup>
 
-        <RelativeLayout
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/label_unit"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linear_height"
+                android:layout_width="105dp"
                 android:layout_height="wrap_content"
-                android:text="Unit: "/>
-            <Spinner
-                android:layout_below="@+id/label_unit"
-                android:background="@drawable/button_round"
-                android:id="@+id/spinner_bmi_category"
-                android:layout_width="150dp"
+                android:layout_centerHorizontal="true">
+                <EditText
+                    android:id="@+id/field_cm"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="280dp"
+                    android:background="@drawable/edit_round"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:visibility="gone"/>
+                <EditText
+                    android:id="@+id/field_feet"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="280dp"
+                    android:background="@drawable/edit_round"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" />
+
+                <Space
+                    android:id="@+id/space_height"
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/field_inches"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@id/field_feet"
+                    android:layout_marginTop="280dp"
+                    android:background="@drawable/edit_round"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/label_height"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linear_height"
+                android:gravity="center"
+                android:text="Height(cm)" />
+
+
+            <EditText
+                android:id="@+id/field_weight"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
-                />
+                android:layout_below="@+id/label_height"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="350dp"
+                android:background="@drawable/edit_round"
+                android:ems="10"
+                android:inputType="number"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
+
+            <TextView
+                android:id="@+id/label_weight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/field_weight"
+                android:gravity="center"
+                android:text="Weight(kg)" />
+
+            <Button
+                android:id="@+id/button_submit"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/field_weight"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/button_round2"
+                android:text="Submit"
+                android:textColor="#FFFF"
+                android:textSize="18sp" />
+
+
         </RelativeLayout>
 
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Height"
-            android:layout_gravity="center"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/field_feet"
-                android:background="@drawable/edit_round"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="5"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:hint="Feet"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/field_inches"
-                android:background="@drawable/edit_round"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="5"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:hint="Inches"
-                android:inputType="textPersonName" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Weight"
-            android:layout_gravity="center"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/field_pounds"
-                android:background="@drawable/edit_round"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="Pounds"
-                android:padding="10dp"
-                android:inputType="textPersonName" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
-
-            <Button
-                android:id="@+id/button_calculate"
-                android:layout_margin="15dp"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:background="@drawable/button_round2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Calculate" />
+    </ScrollView>
 
 
-            <!-- TEST BUTTON FOR LOGOUT -->
-            <Button
-                android:id="@+id/button_logout"
-                android:padding="10dp"
-                android:layout_margin="15dp"
-                android:textColor="#fff"
-                android:background="@drawable/button_round2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Logout" />
 
-        </LinearLayout>
-
-
-    </LinearLayout>
 
 </RelativeLayout>

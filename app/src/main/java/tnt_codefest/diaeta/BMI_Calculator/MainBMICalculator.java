@@ -1,7 +1,6 @@
 package tnt_codefest.diaeta.BMI_Calculator;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +13,6 @@ import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import tnt_codefest.diaeta.Account.Login;
-import tnt_codefest.diaeta.Database.PreferencesKeys;
 import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.R;
 
@@ -39,7 +36,7 @@ public class MainBMICalculator extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.weight_class_layout);
+        setContentView(R.layout.activity_bmi_calculator);
 
         sqLiteHelper = new SQLiteHelper(getApplicationContext());
 
@@ -115,7 +112,6 @@ public class MainBMICalculator extends AppCompatActivity{
 //                finish();
 //            }
 //        });
-
         button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
