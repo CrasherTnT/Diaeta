@@ -25,6 +25,7 @@
         <activity android:name=".BMI_Calculator.WeightClassification" />
         <activity android:name=".Account.Login" />
         <activity android:name=".Account.Signup" />
+        <activity android:name=".Profile.Profile"/>
     </application>
 
 </manifest>

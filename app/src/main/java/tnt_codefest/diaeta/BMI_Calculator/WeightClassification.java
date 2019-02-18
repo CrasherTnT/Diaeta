@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import tnt_codefest.diaeta.Database.SQLiteHelper;
 import tnt_codefest.diaeta.DietPlan.DietPlan;
+import tnt_codefest.diaeta.Profile.Profile;
 import tnt_codefest.diaeta.R;
 
 public class WeightClassification extends AppCompatActivity {
@@ -63,7 +64,7 @@ public class WeightClassification extends AppCompatActivity {
         button_diet_plan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), DietPlan.class);
+                Intent intent = new Intent(getApplicationContext(), Profile.class);
                 startActivity(intent);
             }
         });
